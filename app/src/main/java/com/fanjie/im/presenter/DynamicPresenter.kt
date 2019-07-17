@@ -20,6 +20,7 @@ class DynamicPresenter(val view: DynamicContract.Dynamicview) : DynamicContract.
             }
 
             override fun onProgress(p0: Int, p1: String?) {
+
             }
 
             override fun onError(p0: Int, p1: String?) {
