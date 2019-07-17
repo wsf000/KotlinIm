@@ -4,7 +4,7 @@ import com.fanjie.im.base.BasePresenter
 
 /**
  * Created by shaofeng.wang on 2019/7/15.
- * s
+ * ss
  */
 interface DynamicContract  {
 
