@@ -11,9 +11,15 @@ import com.hyphenate.chat.EMOptions
  */
 class IMApplication : Application() {
 
+    companion object {
+        lateinit var instance: IMApplication
+    }
+
 
     override fun onCreate() {
         super.onCreate()
+
+        instance = this
 //        val options = EMOptions()
 //        // 默认添加好友时，是不需要验证的，改成需要验证
 //        options.setAcceptInvitationAlways(false);
