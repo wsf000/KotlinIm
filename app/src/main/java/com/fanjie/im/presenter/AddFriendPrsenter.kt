@@ -13,6 +13,7 @@ import org.jetbrains.anko.doAsync
 
 /**
  * Created by shaofeng.wang on 2019/7/18.
+ * 添加朋友的P层
  */
 class AddFriendPrsenter(val view: AddFriendContract.AddFriendView)
 /** p层需要view层的引用去更新view层*/
