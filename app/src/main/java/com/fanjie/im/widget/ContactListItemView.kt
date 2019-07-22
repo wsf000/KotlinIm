@@ -18,15 +18,11 @@ class ContactListItemView(context: Context?, attrs: AttributeSet? = null) : Rela
     }
 
     fun bindView(contactListItem: ContactListItem) {
-
         if(contactListItem.showFirstLetter){
             firstLetter.visibility = View.VISIBLE
             firstLetter.text = contactListItem.firstLetter.toString()
         } else firstLetter.visibility = View.GONE
         userName.text = contactListItem.userName
-
-
-
     }
 
 

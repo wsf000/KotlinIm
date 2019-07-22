@@ -5,6 +5,7 @@ import com.fanjie.im.base.BaseFragment
 import com.fanjie.im.contract.DynamicContract
 import com.fanjie.im.presenter.DynamicPresenter
 import com.fanjie.im.ui.activity.LoginActivity
+import com.hyphenate.chat.EMClient
 import kotlinx.android.synthetic.main.fragment_dynamic.*
 import kotlinx.android.synthetic.main.header.*
 import org.jetbrains.anko.runOnUiThread
@@ -31,6 +32,7 @@ class DynamicFragmet : BaseFragment() ,DynamicContract.Dynamicview{
 
         //界面显示
         headerTitle.text = getString(R.string.dynamic)
+        meUsername.text =  EMClient.getInstance().currentUser
 
         logout.setOnClickListener {
             presenter.exitAPP()

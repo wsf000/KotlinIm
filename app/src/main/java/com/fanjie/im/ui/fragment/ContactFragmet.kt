@@ -8,59 +8,75 @@ import com.fanjie.im.base.BaseFragment
 import com.fanjie.im.contract.ContactContract
 import com.fanjie.im.presenter.ContactPresenter
 import com.fanjie.im.ui.activity.AddFriendActivity
+import com.hyphenate.chat.EMClient
+import com.itheima.im.adapter.EMContactListenerAdapter
 import kotlinx.android.synthetic.main.fragment_contacts.*
 import kotlinx.android.synthetic.main.header.*
-import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 /**
  * Created by shaofeng.wang on 2019/7/15.
  */
-class ContactFragmet : BaseFragment() ,ContactContract.ContactView{
+class ContactFragmet : BaseFragment(), ContactContract.ContactView {
 
-    val preaenter by lazy {
-        ContactPresenter(this)
+    override fun getLayoutResId(): Int = R.layout.fragment_contacts
+
+    val presenter = ContactPresenter(this)
+
+
+    companion object {
+
+
     }
 
-    override fun getLayoutResId(): Int {
-      return R.layout.fragment_contacts
 
+    val contactListener = object : EMContactListenerAdapter() {
+        override fun onContactAdded(p0: String?) {
+            //重新获取联系人数据
+            presenter.LoadContact()
+        }
     }
-
 
     override fun initData() {
         super.initData()
-        headerTitle.text = getString(R.string.contact)
-        add.visibility = View.VISIBLE
-        add.setOnClickListener { context!!.startActivity<AddFriendActivity>() }
+        initHeader()
+        initSwipeRefreshLayout()
+        initRecyclerView()
+        EMClient.getInstance().contactManager().setContactListener(contactListener)
+        presenter.LoadContact()
+    }
 
-        swipeRefreshLayout.apply {
-            setColorSchemeResources(R.color.qq_blue)
-            isRefreshing = true
-
-            setOnRefreshListener { preaenter.LoadContact() }
-        }
-
+    private fun initRecyclerView() {
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            adapter = ContactAdapter(context,preaenter.contactListItems)
+            adapter = ContactAdapter(context, presenter.contactListItems)
         }
-
-        preaenter.LoadContact()
-
     }
 
-    override fun LoadContactSuccess() {
+    private fun initSwipeRefreshLayout() {
+        swipeRefreshLayout.apply {
+            setColorSchemeResources(R.color.qq_blue)
+            isRefreshing = true
+            setOnRefreshListener { presenter.LoadContact() }
+        }
+    }
 
-        swipeRefreshLayout.isRefreshing = false
-        recyclerView.adapter.notifyDataSetChanged()
-
+    private fun initHeader() {
+        headerTitle.text = getString(R.string.contact)
+        add.visibility = View.VISIBLE
+        add.setOnClickListener { context!!.startActivity<AddFriendActivity>() }
     }
 
     override fun LoadContactFiled() {
-
         swipeRefreshLayout.isRefreshing = false
-        toast(R.string.load_contacts_failed)
+        context!!.toast(R.string.load_contacts_failed)
     }
+
+    override fun LoadContactSuccess() {
+        swipeRefreshLayout.isRefreshing = false
+        recyclerView.adapter.notifyDataSetChanged()
+    }
+
 }

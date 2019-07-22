@@ -12,20 +12,28 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:src="@mipmap/avatar6"
         android:layout_gravity="center_horizontal"/>
 
-    
+    <TextView
+        android:id="@+id/meUsername"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content" />
+
+
     <Button
         android:id="@+id/logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:textAllCaps="false"
         android:background="@drawable/btn_logout"
-        android:text="@string/logout"
-        android:textSize="22sp"
-        android:textColor="@android:color/white"/>
-    
+        android:text="退出"
+
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="22sp" />
+
 </LinearLayout>
