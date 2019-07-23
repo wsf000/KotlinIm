@@ -5,3 +5,6 @@
 效果图如下
 
 ![Alt text](https://github.com/wsf000/KotlinIm/blob/master/app/src/main/res/mipmap-xhdpi/one.png)
+
+![Alt text](https://github.com/wsf000/KotlinIm/blob/master/app/src/main/res/mipmap-xhdpi/two.jpg)
+
