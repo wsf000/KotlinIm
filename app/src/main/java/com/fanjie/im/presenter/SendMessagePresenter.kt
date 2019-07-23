@@ -48,6 +48,9 @@ class SendMessagePresenter(val view: SendMessageContract.senMessageView) : SendM
     override fun loadMessage(username: String) {
         doAsync {
         val conversation = EMClient.getInstance().chatManager().getConversation(username)
+
+            //将加载的消息标记为已读
+            conversation.markAllMessagesAsRead()
             messages.addAll(conversation.allMessages)
             uiThread { view.onMessageLoaded() }
         }

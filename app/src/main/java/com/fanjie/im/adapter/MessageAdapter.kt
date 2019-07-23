@@ -4,8 +4,10 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import com.fanjie.im.ui.activity.ChatActivity
 import com.fanjie.im.widget.MessageListItemView
 import com.hyphenate.chat.EMConversation
+import org.jetbrains.anko.startActivity
 
 /**
  * Created by shaofeng.wang on 2019/7/22.
@@ -13,11 +15,13 @@ import com.hyphenate.chat.EMConversation
 class MessageAdapter(val context: Context, val conversations: MutableList<EMConversation>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
-
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val conversationListItemView = holder.itemView as MessageListItemView
         conversationListItemView.bindView(conversations[position])
+
+        conversationListItemView.setOnClickListener {
+            context.startActivity<ChatActivity>("username" to conversations[position].conversationId())
+        }
 
 
     }
