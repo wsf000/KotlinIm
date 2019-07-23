@@ -29,7 +29,7 @@ class SendMessagePresenter(val view: SendMessageContract.senMessageView) : SendM
                 uiThread { view.sendMessageFailed() }
             }
         })
-        messages.add(emMessage)
+        messages.add(emMessage )
         view.startSendMessage()
         EMClient.getInstance().chatManager().sendMessage(emMessage)
     }
